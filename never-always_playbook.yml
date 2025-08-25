@@ -1,0 +1,24 @@
+- name: Demonstrate never vs always tags
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Copy file to remote
+      ansible.builtin.copy:
+        src: /home/raksha/never.txt
+        dest: /home/raksha/
+      tags:
+        - copy
+
+    - name: Always task running
+      ansible.builtin.debug:
+        msg: "This task runs regardless of --tags or --skip-tags."
+      tags:
+        - always
+
+    - name: Never task running (only runs if explicitly told)
+      ansible.builtin.debug:
+        msg: "This task only runs when --tags never is used."
+      tags:
+        - never
+

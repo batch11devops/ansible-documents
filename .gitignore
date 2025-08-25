@@ -1,0 +1,10 @@
+# Ansible retry files
+*.retry
+
+# Vault-encrypted files
+*.vault
+
+# Logs and temporary files
+*.log
+*.tmp
+

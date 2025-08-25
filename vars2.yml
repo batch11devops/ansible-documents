@@ -1,0 +1,14 @@
+# vars.yml
+tomcat_version: 9.0.89
+tomcat_install_path: /opt/tomcat
+war_source_path: /home/raksha/amazon/Amazon/Amazon/Amazon-Web/target/Amazon.war
+tomcat_user: tomcat
+tomcat_group: tomcat
+tomcat_tarball_url: "https://archive.apache.org/dist/tomcat/tomcat-9/v{{ tomcat_version }}/bin/apache-tomcat-{{ tomcat_version }}.tar.gz"
+tomcat_tarball_path: /tmp/apache-tomcat.tar.gz
+startup_script_path: "{{ tomcat_install_path }}/bin/startup.sh"
+tomcat_scripts:
+  - startup.sh
+  - shutdown.sh
+  - catalina.sh
+

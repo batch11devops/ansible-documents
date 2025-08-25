@@ -1,0 +1,15 @@
+- name: Copy fail.txt and create tomcat directory
+  hosts: all
+  become: true
+  tasks:
+    - name: Copy fail1.txt to remote server 
+      ansible.builtin.copy:
+        src: /home/raksha/fail.txt
+        dest: /home/raksha/
+      notify: Create_Tomcat_directory
+
+  handlers:
+    - name: Create_Tomcat_directory
+      shell:
+        cmd: mkdir -p /home/raksha/faildir
+

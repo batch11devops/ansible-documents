@@ -1,0 +1,9 @@
+- name: Convert the adhoc command into playbook
+  hosts: all
+  become: true  # if needed for permission
+  tasks:
+    - name: Copy file from local to remote destination
+      ansible.builtin.copy:
+        src: /home/raksha/test.txt
+        dest: /home/azureuser/
+

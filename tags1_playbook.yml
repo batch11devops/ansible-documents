@@ -1,0 +1,60 @@
+---
+- name: Copy handler.txt and create tomcat directory
+  hosts: all
+  become: true
+
+  tasks:
+    - name: Copy handler.txt to remote server
+      ansible.builtin.copy:
+        src: /home/raksha/handler.txt
+        dest: /home/raksha/
+      notify: Create_Tomcat_directory
+      tags:
+        - copy
+        - files
+
+    - name: Message - Copy Task is Running
+      ansible.builtin.debug:
+        msg: "✅ The copy task is being executed."
+      tags:
+        - copy
+
+    - name: Message - Copy Task Skipped
+      ansible.builtin.debug:
+        msg: "⏩ The copy task was skipped."
+      tags:
+        - copy_skip
+
+    - name: Display completion message (always runs)
+      ansible.builtin.debug:
+        msg: "🔄 This task runs regardless of --tags or --skip-tags"
+      tags:
+        - always
+
+    - name: Create a sample log file
+      ansible.builtin.file:
+        path: /home/raksha/sample.log
+        state: touch
+      tags:
+        - logs
+        - setup
+
+    - name: Message - Log Task is Running
+      ansible.builtin.debug:
+        msg: "✅ The log file task is being executed."
+      tags:
+        - logs
+
+    - name: Message - Log Task Skipped
+      ansible.builtin.debug:
+        msg: "⏩ The log file task was skipped."
+      tags:
+        - logs_skip
+
+  handlers:
+    - name: Create_Tomcat_directory
+      ansible.builtin.shell:
+        cmd: mkdir -p /home/raksha/tomcat2
+      tags:
+        - tomcat
+
